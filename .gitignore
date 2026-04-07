@@ -1,0 +1,10 @@
+# Fichiers de configuration spécifiques à l'éditeur CLion
+.idea/
+
+# Dossiers de compilation générés par CMake/CLion
+cmake-build-*/
+
+# Fichiers compilés (au cas où)
+*.o
+*.out
+*.exe
