@@ -15,11 +15,11 @@ protected:
 
 public:
     Entite(string nom, int hp);
+    virtual ~Entite() {}
     string getNom();
     int getHpActuel();
     int getHpMax();
     void recevoirDegats(int degats);
     bool estVivant();
-    virtual void attaquer() = 0;
 };
 #endif //PROJETA3S6_ENTITE_H

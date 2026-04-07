@@ -9,7 +9,11 @@
 
 #include "entite.h"
 #include "monstre.h"
+#include "actionAct.h"
 using namespace std;
+
+
+class Monstre;
 
 class Joueur : public Entite {
 protected:
@@ -19,7 +23,7 @@ protected:
 
 public:
     Joueur(string nomEntite, int hp);
-    void attaquer(Monstre& cible) override;
+    void attaquer(Monstre& cible);
     void agirACT(Monstre& cible, ActionAct action);
     void epargnerMercy(Monstre& cible);
     int getVictoires();

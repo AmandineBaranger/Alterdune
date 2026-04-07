@@ -13,4 +13,16 @@ add_executable(ProjetA3S6 main.cpp
         jeu.h
         jeu.cpp
         actionAct.h
-        actionAct.cpp)
+        actionAct.cpp
+        item.h
+        item.cpp
+        entreebestiaire.h
+        entreebestiaire.cpp
+        bestiaire.h
+        bestiaire.cpp
+        monstrenormal.h
+        monstrenormal.cpp
+        miniboss.h
+        miniboss.cpp
+        boss.h
+        boss.cpp)

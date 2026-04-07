@@ -9,7 +9,7 @@
 #include "joueur.h"
 #include "entite.h"
 using namespace std;
-
+class Joueur;
 class Monstre : public Entite {
 protected:
     int attaque;
