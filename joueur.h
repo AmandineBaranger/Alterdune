@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 
+#include "bestiaire.h"
+
 class Monstre; // Déclaration anticipée pour éviter les dépendances circulaires
 class ActionAct;
 
@@ -15,6 +17,7 @@ private:
     int monstresEpargnes;
     int victoires;
     std::vector<Item> inventaire; // Composition : le joueur possède un inventaire d'objets
+    Bestiaire monBestiaire;
 
 public:
     Joueur(std::string nomEntite, int hp);
@@ -34,6 +37,7 @@ public:
     int getMonstresTues();
     int getMonstresEpargnes();
     std::vector<Item>& getInventaire(); // Permet au Jeu d'accéder aux items
+    Bestiaire& getBestiaire();
 };
 
 #endif

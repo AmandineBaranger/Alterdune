@@ -6,6 +6,8 @@
 #include "actionAct.h"
 #include <iostream>
 
+#include "bestiaire.h"
+
 using namespace std;
 
 Joueur::Joueur(string nomEntite, int hp) : Entite(nomEntite, hp) {
@@ -93,3 +95,6 @@ int Joueur::getVictoires() { return victoires; }
 int Joueur::getMonstresTues() { return monstresTues; }
 int Joueur::getMonstresEpargnes() { return monstresEpargnes; }
 vector<Item>& Joueur::getInventaire() { return inventaire; }
+Bestiaire& Joueur::getBestiaire() {
+    return monBestiaire;
+}

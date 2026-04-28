@@ -125,8 +125,7 @@ void Jeu::demarrer() {
 
         if (choix == 1) {
             cout << "\n-- BESTIAIRE --" << endl;
-            // Appel de la méthode afficher() de la classe Bestiaire
-            cout << "(En cours d'implementation...)" << endl;
+            joueurPrincipal.getBestiaire().afficher();
         }
         else if (choix == 2) {
             if (!baseMonstres.empty()) {
@@ -193,7 +192,10 @@ void Jeu::boucleCombat(Joueur& j, Monstre* m) {
 
         if (choix == 1) {
             j.attaquer(*m);
-            if (!m->estVivant()) combatTermine = true;
+            if (!m->estVivant()) {
+                combatTermine = true;
+                j.getBestiaire().ajouterEntree(*m, "Tue");
+            }
         }
         else if (choix == 2) {
             cout << "-- ACTIONS DISPONIBLES --" << endl;
@@ -230,9 +232,9 @@ void Jeu::boucleCombat(Joueur& j, Monstre* m) {
         }
         else if (choix == 4) {
             j.epargnerMercy(*m);
-            // Vérification de la jauge Mercy de la cible
             if (m->peutEtreEpargne()) {
                 combatTermine = true;
+                j.getBestiaire().ajouterEntree(*m, "Epargne");
             }
         }
         else {
