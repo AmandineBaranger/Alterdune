@@ -33,3 +33,7 @@ bool Entite::estVivant() {
     }
     return true;
 }
+
+void Entite::restaurerHp() {
+    hpActuel = hpMax;
+}

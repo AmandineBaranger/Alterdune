@@ -21,5 +21,6 @@ public:
     int getHpMax();
     void recevoirDegats(int degats);
     bool estVivant();
+    void restaurerHp();
 };
 #endif //PROJETA3S6_ENTITE_H
