@@ -8,12 +8,16 @@
 
 using namespace std;
 
-Monstre::Monstre(string nomEntite, int hp, int atk, int def, int mGoal)
+Monstre::Monstre(string nomEntite, int hp, int atk, int def, int mGoal, string a1, string a2, string a3, string a4)
     : Entite(nomEntite, hp) {
     attaque = atk;
     defense = def;
     mercyGoal = mGoal;
     mercyActuel = 0;
+    actionsPossibles[0] = a1;
+    actionsPossibles[1] = a2;
+    actionsPossibles[2] = a3;
+    actionsPossibles[3] = a4;
 }
 
 void Monstre::attaquer(Joueur& cible) {
@@ -44,4 +48,8 @@ void Monstre::modifierMercy(int valeur) {
 
 bool Monstre::peutEtreEpargne() {
     return mercyActuel >= mercyGoal;
+}
+
+string Monstre::getAction(int index) {
+    return actionsPossibles[index];
 }

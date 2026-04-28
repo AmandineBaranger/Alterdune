@@ -40,19 +40,33 @@ void Jeu::chargerFichiers() {
     }
 
     string ligne;
+    // On ignore la première ligne si c'est l'en-tête (categorie;nom;hp;atk;def...)
+    // getline(fichierMonstres, ligne); // Décommente cette ligne si ton CSV a un en-tête !
+
     while (getline(fichierMonstres, ligne)) {
         if (ligne.empty()) continue; // Ignorer les lignes vides potentielles
 
         stringstream ss(ligne);
-        string cat, nom, hpStr, atkStr, defStr, mercyStr;
+        string cat, nom, hpStr, atkStr, defStr, mercyStr, a1, a2, a3, a4;
 
-        // Parsing des données séparées par des points-virgules
+        // Parsing des 10 colonnes séparées par des points-virgules
         getline(ss, cat, ';');
         getline(ss, nom, ';');
         getline(ss, hpStr, ';');
         getline(ss, atkStr, ';');
         getline(ss, defStr, ';');
         getline(ss, mercyStr, ';');
+        getline(ss, a1, ';'); // Action 1
+        getline(ss, a2, ';'); // Action 2
+        getline(ss, a3, ';'); // Action 3
+
+        // Pour la dernière colonne, on prend jusqu'à la fin de la ligne (pas de ';')
+        getline(ss, a4);
+
+        // Nettoyage d'un éventuel retour chariot (\r) invisible à la fin de a4 (fréquent sous Windows)
+        if (!a4.empty() && a4.back() == '\r') {
+            a4.pop_back();
+        }
 
         try {
             // Conversion des chaînes de caractères en entiers
@@ -61,16 +75,16 @@ void Jeu::chargerFichiers() {
             int def = stoi(defStr);
             int mercy = stoi(mercyStr);
 
-            // Instanciation polymorphique selon la catégorie lue dans le fichier
+            // Instanciation polymorphique AVEC les 4 nouvelles actions
             if (cat == "NORMAL") {
-                baseMonstres.push_back(new MonstreNormal(nom, hp, atk, def, mercy));
+                baseMonstres.push_back(new MonstreNormal(nom, hp, atk, def, mercy, a1, a2, a3, a4));
             } else if (cat == "MINIBOSS") {
-                baseMonstres.push_back(new Miniboss(nom, hp, atk, def, mercy));
+                baseMonstres.push_back(new Miniboss(nom, hp, atk, def, mercy, a1, a2, a3, a4));
             } else if (cat == "BOSS") {
-                baseMonstres.push_back(new Boss(nom, hp, atk, def, mercy));
+                baseMonstres.push_back(new Boss(nom, hp, atk, def, mercy, a1, a2, a3, a4));
             }
         } catch (...) {
-            // En cas de ligne mal formée (stoi échoue), on ignore l'entrée et on passe à la suivante
+            // En cas de ligne mal formée (stoi échoue ou en-tête lu par erreur), on ignore
             continue;
         }
     }
@@ -198,25 +212,31 @@ void Jeu::boucleCombat(Joueur& j, Monstre* m) {
             }
         }
         else if (choix == 2) {
-            cout << "-- ACTIONS DISPONIBLES --" << endl;
-            cout << "1. COMPLIMENT\n2. JOKE";
+            cout << "-- ACTIONS DISPONIBLES POUR " << m->getNom() << " --" << endl;
 
-            // Restriction du nombre d'actions affichées selon la catégorie (Polymorphisme implicite)
-            if (m->getCategory() == "MINIBOSS" || m->getCategory() == "BOSS") cout << "\n3. INSULT";
-            if (m->getCategory() == "BOSS") cout << "\n4. DANCE";
-            cout << "\nChoix : ";
+            // On affiche uniquement les actions qui ne sont pas des tirets "-"
+            vector<string> choixValides;
+            for (int i = 0; i < 4; i++) {
+                if (m->getAction(i) != "-") {
+                    cout << i + 1 << ". " << m->getAction(i) << endl;
+                    choixValides.push_back(m->getAction(i));
+                }
+            }
+            cout << "Choix : ";
+            int numAct;
+            cin >> numAct;
 
-            int choixAct;
-            cin >> choixAct;
+            if (numAct > 0 && numAct <= choixValides.size()) {
+                string nomAction = choixValides[numAct - 1];
 
-            ActionAct actionChoisie;
-            // Récupération de l'action dans le catalogue via la surcharge de l'opérateur [] de la map
-            if (choixAct == 1) actionChoisie = catalogueActions["COMPLIMENT"];
-            else if (choixAct == 2) actionChoisie = catalogueActions["JOKE"];
-            else if (choixAct == 3) actionChoisie = catalogueActions["INSULT"];
-            else if (choixAct == 4) actionChoisie = catalogueActions["DANCE"];
-
-            j.agirACT(*m, actionChoisie);
+                // On vérifie si l'action existe dans notre catalogue
+                if (catalogueActions.count(nomAction)) {
+                    j.agirACT(*m, catalogueActions[nomAction]);
+                } else {
+                    // Si l'action est dans le CSV mais pas définie dans le catalogue C++
+                    cout << "Vous essayez " << nomAction << " mais rien ne se passe..." << endl;
+                }
+            }
         }
         else if (choix == 3) {
             j.afficherInventaire();

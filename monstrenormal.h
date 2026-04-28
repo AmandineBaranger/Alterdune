@@ -11,7 +11,7 @@ using namespace std;
 
 class MonstreNormal : public Monstre {
 public:
-    MonstreNormal(string nomEntite, int hp, int atk, int def, int mGoal);
+    MonstreNormal(std::string nomEntite, int hp, int atk, int def, int mGoal, std::string a1, std::string a2, std::string a3, std::string a4);
     string getCategory() override;
 };
 #endif //PROJETA3S6_MONSTRENORMAL_H

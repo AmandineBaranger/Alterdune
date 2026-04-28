@@ -80,7 +80,7 @@ void Joueur::utiliserItem(int index) {
         int soin = obj.utiliser();
         // Pour l'instant, on suppose que tous les items sont de type HEAL
         hpActuel += soin;
-        if (hpActuel > hpMax) hpMax = hpActuel; // On bride aux HP max
+        if (hpActuel > hpMax) hpActuel = hpMax; // On bride aux HP max
 
         cout << "Vous utilisez " << obj.getNom() << " et recuperez " << soin << " HP !" << endl;
         obj.reduireQuantite();
