@@ -23,7 +23,10 @@ Monstre::Monstre(string nomEntite, int hp, int atk, int def, int mGoal, string a
 void Monstre::attaquer(Joueur& cible) {
     cout << nom << " vous attaque !" << endl;
 
-    int degats = rand() % (cible.getHpMax() + 1);
+    // Formule équilibrée : pourcentage aléatoire entre 30% et 70% des HP max
+    int pourcentage = 30 + rand() % 41;  // 30 à 70
+    int maxDamage = (cible.getHpMax() * pourcentage) / 100;
+    int degats = rand() % (maxDamage + 1);
 
     if (degats == 0) {
         cout << "L'attaque de " << nom << " a echoue !" << endl;

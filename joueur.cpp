@@ -20,8 +20,10 @@ Joueur::Joueur(string nomEntite, int hp) : Entite(nomEntite, hp) {
 void Joueur::attaquer(Monstre& cible) {
     cout << nom << " lance une attaque sur " << cible.getNom() << " !" << endl;
 
-    // Formule de dégâts imposée par le sujet : rand(0, HP_max_defenseur)
-    int degats = rand() % (cible.getHpMax() + 1);
+    // Formule équilibrée : pourcentage aléatoire entre 30% et 70% des HP max
+    int pourcentage = 30 + rand() % 41;  // 30 à 70
+    int maxDamage = (cible.getHpMax() * pourcentage) / 100;
+    int degats = rand() % (maxDamage + 1);
 
     if (degats == 0) {
         cout << "L'attaque a echoue, aucun degat inflige." << endl;
