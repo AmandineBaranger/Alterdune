@@ -21,6 +21,12 @@ Jeu::Jeu() {
     catalogueActions["JOKE"] = ActionAct("JOKE", "Tu racontes une blague absurde sur les frites.", 15);
     catalogueActions["INSULT"] = ActionAct("INSULT", "Tu te moques de sa mere. Il n'apprecie pas !", -20);
     catalogueActions["DANCE"] = ActionAct("DANCE", "Tu entames une danse de la pluie. Le monstre est confus.", 10);
+    catalogueActions["OBSERVE"] = ActionAct("OBSERVE", "Tu observes attentivement le monstre, il semble intrigué.", 15);
+    catalogueActions["PET"] = ActionAct("PET", "Tu caresses doucement le monstre. Il ronronne presque.", 25);
+    catalogueActions["OFFER_SNACK"] = ActionAct("OFFER_SNACK", "Tu lui offres une collation. Il accepte avec gratitude.", 30);
+    catalogueActions["DISCUSS"] = ActionAct("DISCUSS", "Vous discutez de la vie, de l'univers et du reste.", 20);
+    catalogueActions["REASON"] = ActionAct("REASON", "Tu tentes de raisonner le monstre avec logique.", 18);
+    catalogueActions["TAUNT"] = ActionAct("TAUNT", "Tu provoque ouvertement le monstre. Il s'énerve fortement.", -25);
 }
 
 Jeu::~Jeu() {
@@ -32,7 +38,7 @@ Jeu::~Jeu() {
 }
 
 void Jeu::chargerFichiers() {
-    ifstream fichierMonstres("monstres.csv");
+    ifstream fichierMonstres("monstres.csv"); 
 
     if (!fichierMonstres.is_open()) {
         cerr << "Erreur : fichier monstres.csv introuvable. Arret du programme." << endl;

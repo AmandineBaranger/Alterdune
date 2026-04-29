@@ -27,6 +27,10 @@ int Item::getQuantite() {
     return quantite;
 }
 
+int Item::getValeur() {
+    return valeur;
+}
+
 int Item::utiliser() {
     if (quantite > 0) {
         return valeur;

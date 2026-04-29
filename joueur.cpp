@@ -68,6 +68,7 @@ void Joueur::afficherInventaire() {
     cout << "--- INVENTAIRE DE " << nom << " ---" << endl;
     for (int i = 0; i < inventaire.size(); i++) {
         cout << i + 1 << ". " << inventaire[i].getNom()
+             << " - " << inventaire[i].getValeur() << " HP"
              << " (x" << inventaire[i].getQuantite() << ")" << endl;
     }
 }

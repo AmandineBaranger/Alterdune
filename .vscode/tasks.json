@@ -1,0 +1,24 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Alterdune main program",
+			"type": "shell",
+			"command": "g++ -std=c++17 -o Alterdune.exe main.cpp actionAct.cpp bestiaire.cpp boss.cpp entite.cpp entreebestiaire.cpp item.cpp jeu.cpp joueur.cpp miniboss.cpp monstre.cpp monstrenormal.cpp -I.",
+			"args": [],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Run Alterdune main program",
+			"type": "shell",
+			"command": "g++ -std=c++17 -o Alterdune.exe main.cpp actionAct.cpp bestiaire.cpp boss.cpp entite.cpp entreebestiaire.cpp item.cpp jeu.cpp joueur.cpp miniboss.cpp monstre.cpp monstrenormal.cpp -I.",
+			"args": [],
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}

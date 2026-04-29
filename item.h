@@ -21,6 +21,7 @@ public:
 
     string getNom();
     int getQuantite();
+    int getValeur();
 
     int utiliser();
     void reduireQuantite();
